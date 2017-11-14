@@ -10,5 +10,5 @@ IN PROGRESS
 		ipaddress IP XXX.XXX.XXX.XXX or ETH0 (local ip or eth0 for automatic get interface address) 
  		auth APIKEY MAIL
  		domains DOMAIN.TLD WWW. DOMAIN.TLD
- 		period 30s
+ 		period 30m
 	}
