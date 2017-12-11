@@ -1,0 +1,10 @@
+http://:2015 {
+	dyndns {
+		provider cloudflare		
+		ipaddress http://whatismyip.akamai.com/
+ 		auth b40abcfa**************af380b8d3 *********@******.ru
+ 		domains ***********.com www.*********.com
+ 		period 30m
+	}
+}
+
