@@ -10,10 +10,14 @@ Make this steps for compilation caddy with plugin caddy-dyndns:
 Use "dyndns" directives in your configuration Caddyfile:
 
 dyndns {
-	provider cloudflare		
+	provider cloudflare
+	
 	ipaddress http://whatismyip.akamai.com/
+	
  	auth *****af380b8d3 *****@*****.com
+	
  	domains *****.com www.*****.com
+	
  	period 30m
 }
 
