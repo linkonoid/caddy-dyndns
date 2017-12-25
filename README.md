@@ -1,5 +1,6 @@
 # caddy-dyndns
 Dynamic dns plugin for Caddy server (on this moment support cloudflare and yandex)
+Link in official caddyserver repository: https://caddyserver.com/docs/dyndns
 
 Make this steps for compilation caddy with plugin caddy-dyndns:
 - add directive in var section: "dyndns", //github.com/linkonoid/caddy-dyndns 
