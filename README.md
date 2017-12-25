@@ -29,8 +29,8 @@ provider: cloudflare/yandex - name dns provider
 
 ipaddress: http-url/remote/local/xxx.xxx.xxx.xxx - get external IP from remote server (http://whatismyip.akamai.com/, http://ipv4.myexternalip.com/raw or other with body in RAW format)/get remote IP auto in local mode/ get local IP auto)/Hand your IP xxx.xxx.xxx.xxx
 
-auth: AuthApikeyToken - authentification token and via space Email - email (for yandex -  not present)
+auth: AuthApikeyToken - authentification token and via space Email - email address (for yandex -  not present)
 
 domains: name.tld - list of domains to update via space symbol  
 
-period: XXs/XXm/XXh/mmD - time period ip update (s - seconds, m - minutes, h - hours, d - days)
+period: XXs/XXm/XXh/XXd - time period ip update (s - seconds, m - minutes, h - hours, d - days)
