@@ -1,5 +1,5 @@
 # caddy-dyndns
-Dynamic dns plugin for Caddy server (on this moment supports https://www.cloudflare.com/ and https://pdd.yandex.ru/ providers protocols)
+Dynamic dns plugin for Caddy server (on this moment supports https://www.cloudflare.com/ and https://pdd.yandex.ru/ providers protocols).
 Link in official caddyserver repository: https://caddyserver.com/docs/dyndns
 
 Make this steps for compilation caddy with plugin caddy-dyndns:
