@@ -9,7 +9,7 @@ Make this steps for compilation caddy with plugin caddy-dyndns:
 - add directives in Caddyfile
 
 Use "dyndns" directives in your configuration Caddyfile:
-
+```
 dyndns {
 
 	provider cloudflare
@@ -22,7 +22,7 @@ dyndns {
 	
  	period 30m
 }
-
+```
 
 Description:
 
