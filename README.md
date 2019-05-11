@@ -1,5 +1,9 @@
 # caddy-dyndns
+
 Dynamic dns plugin for Caddy server (on this moment supports https://www.cloudflare.com/ and https://pdd.yandex.ru/ providers protocols).
+
+If you use dnspod international edition, please set `Email` as `international@dnspod.com`,and see https://www.dnspod.com/docs/info.html#get-the-user-token to get user_token.
+
 Link in official caddyserver repository: https://caddyserver.com/docs/dyndns
 
 Make this steps for compilation caddy with plugin caddy-dyndns:
