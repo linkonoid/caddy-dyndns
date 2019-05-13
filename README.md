@@ -1,5 +1,7 @@
 # caddy-dyndns
-Dynamic dns plugin for Caddy server (on this moment supports https://www.cloudflare.com/ and https://pdd.yandex.ru/ providers protocols).
+
+Dynamic dns plugin for Caddy server (on this moment supports https://www.cloudflare.com/ , https://pdd.yandex.ru/ and dnspod providers protocols).
+
 Link in official caddyserver repository: https://caddyserver.com/docs/dyndns
 
 Make this steps for compilation caddy with plugin caddy-dyndns:
@@ -26,11 +28,14 @@ dyndns {
 
 Description:
 
-provider: cloudflare/yandex - name dns provider
+provider: cloudflare/yandex/dnspod - name dns provider
 
 ipaddress: http-url/remote/local/xxx.xxx.xxx.xxx - get external IP from remote server (http://whatismyip.akamai.com/, http://ipv4.myexternalip.com/raw or other with body in RAW format)/get remote IP auto in local mode/ get local IP auto)/Hand your IP xxx.xxx.xxx.xxx
 
 auth: AuthApikeyToken - authentification token and via space Email - email address (for yandex -  not present)
+
+	For dnspod token: id,token
+	If you use dnspod international edition, please set `Email` as `international@dnspod.com`,and see https://www.dnspod.com/docs/info.html#get-the-user-token to get user_token.
 
 domains: name.tld - list of domains to update via space symbol  
 

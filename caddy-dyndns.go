@@ -143,6 +143,8 @@ func registerCallback(c *caddy.Controller, registerFunc func(func() error)) erro
 					err = cloudflareupd(conf)
 				case "yandex":
 					err = yandexupd(conf)
+				case "dnspod":
+					err = dnspodupd(conf)
 				default:
 					err = cloudflareupd(conf)
 				}
