@@ -1,4 +1,4 @@
-module github.com/gophers/caddy-dyndns
+module github.com/linkonoid/caddy-dyndns
 
 go 1.12
 
