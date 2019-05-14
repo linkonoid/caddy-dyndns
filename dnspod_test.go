@@ -12,6 +12,9 @@ func TestDnsupd(t *testing.T) {
 	c.Auth.Apikey = os.Getenv("DNSPOD_TOKEN")
 	c.Auth.Email = os.Getenv("DNSPOD_EMAIL")
 	c.Ipupdate = os.Getenv("DNSPOD_IP")
+	if c.Auth.Apikey == "" {
+		return
+	}
 	err := dnspodupd(c)
 	if err != nil {
 		t.Error(err)
