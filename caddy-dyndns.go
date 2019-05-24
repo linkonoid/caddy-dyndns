@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"net"
 	"net/http"
+	"os"
 	"strings"
 
 	"github.com/mholt/caddy"
@@ -25,7 +26,10 @@ type Config struct {
 	Ipupdate  string
 }
 
+var debug bool
+
 func init() {
+	debug = os.Getenv("DDNS_DEBUG") == "on"
 	caddy.RegisterPlugin("dyndns", caddy.Plugin{Action: startup})
 }
 
@@ -145,6 +149,8 @@ func registerCallback(c *caddy.Controller, registerFunc func(func() error)) erro
 					err = yandexupd(conf)
 				case "dnspod":
 					err = dnspodupd(conf)
+				case "digitalocean":
+					err = digitaloceanupd(conf)
 				default:
 					err = cloudflareupd(conf)
 				}
