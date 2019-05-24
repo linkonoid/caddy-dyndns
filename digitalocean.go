@@ -1,50 +1,69 @@
 package dyndns
 
 import (
+	"context"
 	"strings"
 
-	cloudfl "github.com/cloudflare/cloudflare-go"
+	"golang.org/x/oauth2"
+
+	"github.com/digitalocean/godo"
 )
+
+type tokenSource struct {
+	AccessToken string
+}
+
+func (t *tokenSource) Token() (*oauth2.Token, error) {
+	token := &oauth2.Token{
+		AccessToken: t.AccessToken,
+	}
+	return token, nil
+}
 
 func digitaloceanupd(configs Config) error {
 
-	api, err := cloudfl.New(configs.Auth.Apikey, configs.Auth.Email)
-	if err != nil {
-		return err
+	tokenSource := &tokenSource{
+		AccessToken: configs.Auth.Apikey,
 	}
+	oauthClient := oauth2.NewClient(context.Background(), tokenSource)
+	client := godo.NewClient(oauthClient)
+	ctx := context.TODO()
 
-	for _, domain := range configs.Domains {
-
-		zoneID := ""
-		zones, err := api.ListZones()
+	for _, domainName := range configs.Domains {
+		// split domain
+		domainArray := strings.Split(domainName, ".")
+		domain := domainArray[len(domainArray)-2] + "." + domainArray[len(domainArray)-1]
+		var subDomain string
+		if len(domainArray) > 2 {
+			subDomain = domainName[:len(domainName)-len(domain)-1]
+		}
+		// get origin records
+		records, _, err := client.Domains.Records(ctx, domain, nil)
 		if err != nil {
 			return err
 		}
-		for _, zone := range zones {
-			if strings.HasSuffix(domain, zone.Name) {
-				zoneID = zone.ID
+		var record *godo.DomainRecord
+		for i := 0; i < len(records); i++ {
+			if records[i].Name == subDomain {
+				record = &records[i]
+				break
 			}
 		}
-
-		recordID := ""
-		records, err := api.DNSRecords(zoneID, cloudfl.DNSRecord{})
-		if err != nil {
-			return err
-		}
-		for _, r := range records {
-			if r.Type == "A" && r.Name == domain {
-				recordID = r.ID
+		if record == nil {
+			_, _, err = client.Domains.CreateRecord(ctx, domain, &godo.DomainRecordEditRequest{
+				Type: "A",
+				Name: subDomain,
+				Data: configs.Ipupdate,
+			})
+			if err != nil {
+				return err
 			}
-		}
-
-		record, err := api.DNSRecord(zoneID, recordID)
-		if err != nil {
-			return err
-		}
-
-		if configs.Ipupdate != record.Content {
-			record.Content = configs.Ipupdate
-			err = api.UpdateDNSRecord(zoneID, recordID, record)
+		} else if configs.Ipupdate != record.Data {
+			_, _, err = client.Domains.EditRecord(ctx, domain, record.ID, &godo.DomainRecordEditRequest{
+				Type: "A",
+				Name: subDomain,
+				Data: configs.Ipupdate,
+			})
 			if err != nil {
 				return err
 			}
