@@ -1,6 +1,6 @@
 # caddy-dyndns
 
-Dynamic dns plugin for Caddy server (on this moment supports https://www.cloudflare.com/ , https://pdd.yandex.ru/ and dnspod providers protocols).
+Dynamic dns plugin for Caddy server (on this moment supports https://www.cloudflare.com/ , https://pdd.yandex.ru/, https://www.digitalocean.com/ and dnspod providers protocols).
 
 Link in official caddyserver repository: https://caddyserver.com/docs/dyndns
 
@@ -28,7 +28,7 @@ dyndns {
 
 Description:
 
-provider: cloudflare/yandex/dnspod - name dns provider
+provider: cloudflare/yandex/digitalocean/dnspod - name dns provider
 
 ipaddress: http-url/remote/local/xxx.xxx.xxx.xxx - get external IP from remote server (http://whatismyip.akamai.com/, http://ipv4.myexternalip.com/raw or other with body in RAW format)/get remote IP auto in local mode/ get local IP auto)/Hand your IP xxx.xxx.xxx.xxx
 
