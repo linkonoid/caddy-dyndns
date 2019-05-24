@@ -8,15 +8,8 @@ import (
 	"log"
 	"net/http"
 	"net/url"
-	"os"
 	"strings"
 )
-
-var debug bool
-
-func init() {
-	debug = os.Getenv("DNSPOD_DEBUG") == "on"
-}
 
 type dnspodRecordResp struct {
 	Name   string `json:"name,omitempty"`
