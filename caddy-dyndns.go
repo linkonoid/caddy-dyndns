@@ -8,7 +8,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/mholt/caddy"
+	"github.com/caddyserver/caddy"
 	"github.com/robfig/cron"
 )
 
